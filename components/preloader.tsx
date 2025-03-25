@@ -80,7 +80,10 @@ const Preloader = ({
         scale: 1.3,
         y: -80,
         ease: "power2.inOut",
-        onComplete: () => setIsLoading(false),
+        onComplete: () => {
+          setIsLoading(false);
+          window.dispatchEvent(new Event("preloaderComplete"));
+        },
       });
     },
     { scope: loaderRef },

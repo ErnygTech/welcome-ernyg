@@ -21,11 +21,26 @@ const CookieConsent = () => {
   useEffect(() => {
     // Check if user has already made a choice
     const savedConsent = getConsentCookie();
-    if (!savedConsent) {
-      setShowBanner(true);
-    } else {
+
+    // Listen for preloader completion
+    const handlePreloaderComplete = () => {
+      // Only show banner if no consent exists and preloader is done
+      if (!savedConsent) {
+        setTimeout(() => {
+          setShowBanner(true);
+        }, 1000); // Add a small delay after preloader
+      }
+    };
+
+    window.addEventListener("preloaderComplete", handlePreloaderComplete);
+
+    if (savedConsent) {
       setConsent(savedConsent);
     }
+
+    return () => {
+      window.removeEventListener("preloaderComplete", handlePreloaderComplete);
+    };
   }, []);
 
   const handleAcceptAll = () => {
