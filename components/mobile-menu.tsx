@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ExternalLink } from "lucide-react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -99,7 +100,7 @@ const MobileMenu = ({
         } transform translate-x-full z-40 md:hidden`}
       >
         <div className="w-full h-full flex flex-col items-center justify-center gap-8">
-          {["About", "Services", "Projects", "Blog", "Contact"].map(
+          {["About", "Services", "Projects", "Contact", "Blog"].map(
             (item, index) => (
               <button
                 key={item}
@@ -108,13 +109,16 @@ const MobileMenu = ({
                 }}
                 className={`text-4xl font-medium ${
                   colorMode ? "text-white" : "text-black"
-                } uppercase tracking-wider`}
+                } uppercase tracking-wider relative`}
                 onClick={() => {
                   navigationHandler(item.toLowerCase());
                   setIsOpen(false);
                 }}
               >
                 {item}
+                {item === "Blog" && (
+                  <ExternalLink className="w-5 h-5 absolute top-2 -right-6" />
+                )}
               </button>
             ),
           )}

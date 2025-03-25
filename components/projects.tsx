@@ -294,7 +294,7 @@ const Projects = () => {
                transition-opacity duration-300 mb-safe"
             >
               <span className="text-sm sm:text-base font-medium tracking-wider">
-                Scroll to contact
+                Scroll to blog
               </span>
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6"

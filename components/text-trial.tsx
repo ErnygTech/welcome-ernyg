@@ -6,6 +6,7 @@ interface TextTrialProps {
   playOnMount?: boolean;
   disableHover?: boolean;
   play?: boolean;
+  icons?: React.ReactNode;
 }
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -18,6 +19,7 @@ const TextTrial = ({
   playOnMount = false,
   disableHover = false,
   play = false,
+  icons,
 }: TextTrialProps) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [displayText, setDisplayText] = useState(children);
@@ -64,13 +66,14 @@ const TextTrial = ({
 
   return (
     <span
-      className={`inline-block font-oxygenMono ${className}`}
+      className={`inline-flex items-center gap-2 font-oxygenMono ${className}`}
       {...(!disableHover && {
         onMouseEnter: scramble,
         onMouseLeave: stopScramble,
       })}
     >
       {displayText}
+      {icons && icons}
     </span>
   );
 };
